@@ -14,6 +14,10 @@ module.exports = {
       callback:require('./src/start-standup')
     },
     {
+      command: 'status',
+      callback:require('./src/status')
+    },
+    {
       callback:require('./src/noCommand.js') // no right command,will call this function
     }
   ],
