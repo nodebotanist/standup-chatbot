@@ -10,10 +10,6 @@ module.exports = {
       callback: require('./src/help.js')
     },
     {
-      command:'vote',
-      callback:require('./src/vote')
-    },
-    {
       command:'start',
       callback:require('./src/start-standup')
     },
