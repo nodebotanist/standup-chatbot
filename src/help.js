@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
         content: {
           head: {
             type: 'message',
-            text: `Hi there - I'm ${process.env.NAME} bot`,
+            text: `Hi there - I'm standup bot`,
             style: {
               bold: true
             }
@@ -21,18 +21,18 @@ module.exports = async (req, res) => {
           body: [
             {
               type: 'message',
-              text: 'Here are some quick tips to get started!'
+              text: 'Here is a list of commands:'
             },
             {
               type: 'message',
-              text: 'vote',
+              text: 'status',
               style: {
                 bold: true
               }
             },
             {
               type: 'message',
-              text: 'Click a button to vote your Favorite food'
+              text: 'Check the status of your standup'
             }
           ]
         }
