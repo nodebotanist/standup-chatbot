@@ -1,3 +1,4 @@
+const standup = require('./standup');
 let standupQueue = require('./standup')
 
 module.exports = async (req, res) => {
@@ -8,6 +9,20 @@ module.exports = async (req, res) => {
       console.log(payload, type)
       let { toJid, userJid, accountId } = payload;
       try {
+        let messageBody = []
+        if(standupQueue.standups.length === 0){
+            messageBody.push({
+                type: 'message',
+                text: 'No standups are currently running.'
+            })
+        } else {
+            standupQueue.standups.forEach((standup, index) => {
+                messageBody.push({
+                    type: 'message',
+                    text: `${standup.id} -- ACTIVE`
+                })
+            })
+        }
         await zoomApp.sendMessage({
           to_jid: toJid,
           account_id: accountId,
@@ -21,15 +36,7 @@ module.exports = async (req, res) => {
                 bold: true
               }
             },
-            body: [
-              {
-                type: 'message',
-                text: 'no standups are currently running',
-                style: {
-                  bold: true
-                }
-              }
-            ]
+            body: messageBody
           }
         });
         res.send('success');
