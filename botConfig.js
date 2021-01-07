@@ -14,6 +14,10 @@ module.exports = {
       callback:require('./src/vote')
     },
     {
+      command:'start',
+      callback:require('./src/start-standup')
+    },
+    {
       callback:require('./src/noCommand.js') // no right command,will call this function
     }
   ],
