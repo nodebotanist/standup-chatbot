@@ -6,17 +6,12 @@ let botConfig = require('./botConfig');
 const botservice = require('@zoomus/botservice');
 let expressApp = express();
 const cors = require('cors');
-const fs=require('fs-extra');
 const cookieParser = require('cookie-parser')
 const dotenv = require('dotenv');
 const hbs = require('./hbs');
-const NODE_ENV=process.env.NODE_ENV;
+const NODE_ENV='development';
 
-const envConfig = dotenv.parse(fs.readFileSync(nodepath.resolve(`.${NODE_ENV||'production'}.env`)));
-
-for (const k in envConfig) {
-  process.env[k] = envConfig[k]
-}
+dotenv.config()
 
 //middleware body
 expressApp.use(bodyParser.json());
