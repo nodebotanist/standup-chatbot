@@ -14,20 +14,14 @@ const NODE_ENV='development';
 
 dotenv.config()
 
-//connect to db
-const DB_URL = process.env.mongodb_uri + ':27017'
-const DB_NAME = "standupbot"
-
-console.log(DB_URL)
-
-mongoClient.connect(DB_URL, function(err, client) {
+mongoClient.connect(process.env.mongodb_uri, function(err, client) {
   console.log(err)
-  console.log("Connected successfully to server");
+  console.log("Connected successfully to server")
  
-  const db = client.db(DB_NAME);
+  const db = client.db(process.env.mongodb_db)
  
-  client.close();
-});
+  client.close()
+})
 
 //middleware body
 expressApp.use(bodyParser.json());
