@@ -18,6 +18,10 @@ module.exports = {
       callback:require('./src/status')
     },
     {
+      command: 'close',
+      callback:require('./src/close-standup')
+    },
+    {
       callback:require('./src/noCommand.js') // no right command,will call this function
     }
   ],

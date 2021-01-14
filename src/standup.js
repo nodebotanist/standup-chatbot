@@ -1,12 +1,12 @@
 const { v4: uuidv4 } = require('uuid')
-const mongoClient = require('mongodb')
+const { MongoClient } = require('mongodb')
 let standups = []
 
 module.exports = {
     standups,
     start: () => {
         let standupId = uuidv4()
-        mongoClient.connect(process.env.mongodb_uri, function(err, client) {
+        MongoClient.connect(process.env.mongodb_uri, function(err, client) {
             const db = client.db(process.env.mongodb_db)
 
             const collection = db.collection('standups')
@@ -29,7 +29,7 @@ module.exports = {
     status: (cb) => {
         let messageBody = []
 
-        mongoClient.connect(process.env.mongodb_uri, function(err, client) {
+        MongoClient.connect(process.env.mongodb_uri, function(err, client) {
             console.log(err)
             const db = client.db(process.env.mongodb_db)
 
@@ -58,5 +58,27 @@ module.exports = {
             client.close()
         })
 
+    },
+    close: async function(standupId, cb) {
+
+        MongoClient.connect(process.env.mongodb_uri, function(err, client) {
+            console.log(err)
+            const db = client.db(process.env.mongodb_db)
+
+            const collection = db.collection('standups')
+
+            const result = collection.deleteOne({
+                id: standupId
+            }, (err, result) => {
+        
+                if(result.deletedCount === 1){
+                    cb(null, `Closed ${standupId}`)
+                } else {
+                    cb(`Error closing ${standupId}. Use the status command to see if it still in the list.`)
+                }
+            })                
+           
+            client.close()
+        })
     }
 }
