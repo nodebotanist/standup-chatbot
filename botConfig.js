@@ -22,13 +22,26 @@ module.exports = {
       callback:require('./src/close-standup')
     },
     {
+      command: 'question',
+      callback:require('./src/question.js')
+    },
+    {
       callback:require('./src/noCommand.js') // no right command,will call this function
     }
   ],
   botActions: [
     {
       command:'interactive_message_actions',
-      callback:require('./src/interactive_message_actions.js')
+      callback:(req) => {
+        console.log(req.body.payload.original.body)
+        console.log(req.body.payload.original.body[0].items[0])
+      }
+    },
+    {
+      command:'interactive_message_fields_editable',
+      callback:(req, res) => {
+        console.log(req.body)
+      }
     }
   ],
   apis: [
