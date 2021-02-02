@@ -26,6 +26,10 @@ module.exports = {
       callback:require('./src/question.js')
     },
     {
+      command: 'channels',
+      callback: require('./src/channels')
+    },
+    {
       callback:require('./src/noCommand.js') // no right command,will call this function
     }
   ],
