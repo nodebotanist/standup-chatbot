@@ -3,11 +3,9 @@ module.exports = async (req, res) => {
     if (!zoomError) {
       let { type, command, payload } = zoomWebhook;
       let { toJid, userId, accountId } = payload;
-      zoomApp.getClientToken((token) => {
-          console.log('Token: ', token)
-      })
-      console.log(zoomWebhook, zoomApp)
       try {
+        zoomApp.getClientToken((token) => {
+        })
         await zoomApp.sendMessage({
           to_jid: toJid,
           account_id: accountId,
