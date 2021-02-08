@@ -1,11 +1,21 @@
+let fetch = require('node-fetch')
+
 module.exports = async (req, res) => {
     let { zoomApp, zoomError, zoomWebhook, databaseModels } = res.locals;
     if (!zoomError) {
       let { type, command, payload } = zoomWebhook;
       let { toJid, userId, accountId } = payload;
       try {
-        zoomApp.getClientToken((token) => {
-        })
+
+        //   fetch(`https://api.zoom.us/v2/chat/users/${userId}/channels`, {
+        //     method: 'GET',
+        //     headers: {
+        //       'Authorization': 'Bearer: ' + token
+        //     },
+        //   }).then((res) => {
+        //     console.log(res)
+        //   })
+
         await zoomApp.sendMessage({
           to_jid: toJid,
           account_id: accountId,
@@ -38,6 +48,7 @@ module.exports = async (req, res) => {
         });
         res.send('success');
       } catch (e) {
+        console.log(e)
         res.send('fail');
       }
     }
