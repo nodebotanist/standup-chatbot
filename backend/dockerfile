@@ -7,3 +7,5 @@ COPY package.json .
 RUN npm i --also-dev
 
 COPY . .
+
+CMD ["npx", "nodemon", "server.js"]

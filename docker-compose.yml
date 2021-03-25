@@ -4,11 +4,13 @@ services:
   backend:
     build: './backend/'
     volumes:
-      - './backend/node_modules'
-      - './backend/:code'
+      - '/code/backend/node_modules'
+      - './backend/:/code'
   mongodb:
     image: 'mongo:3-xenial'
     environment:
       - MONGO_INITDB_ROOT_USERNAME=chatbot
       - MONGO_INITDB_ROOT_PASSWORD=password
       - MONGO_INITDB=chatbot
+    ports:
+      - "27017:27017"
