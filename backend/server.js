@@ -5,9 +5,8 @@ const connectMongoSession = require('connect-mongodb-session')(session)
 require('dotenv').config()
 
 var app = express()
-console.log(process.env)
 var store = connectMongoSession({
-    uri: `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@localhost:27017`,
+    uri: `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@mongodb:27017`,
     collection: 'sessions'
 })
 
@@ -20,5 +19,9 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
+
+app.get('/', (req, res) => {
+    res.send('Hi!')
+})
 
 server = app.listen(8000)

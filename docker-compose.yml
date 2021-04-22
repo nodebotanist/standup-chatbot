@@ -6,6 +6,8 @@ services:
     volumes:
       - '/code/backend/node_modules'
       - './backend/:/code'
+    ports:
+      - "8000:8000"
   mongodb:
     image: 'mongo:3-xenial'
     environment:
